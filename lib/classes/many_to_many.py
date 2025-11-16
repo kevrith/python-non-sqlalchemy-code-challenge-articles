@@ -15,7 +15,7 @@ class Article:
 
     @title.setter
     def title(self, value):
-     
+        self.value = value
         pass
 
     @property
@@ -65,7 +65,8 @@ class Author:
         return None
 
     def topic_areas(self):
-        return list(set(magazine.category for magazine in self.magazines()))
+        topics = list(set(magazine.category for magazine in self.magazines()))
+        return topics if topics else None
 
 
 class Magazine:

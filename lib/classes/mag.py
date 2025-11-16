@@ -94,3 +94,46 @@ class Author:
         if not articles:
             return None
         return list(set([article.magazine.category for article in articles]))
+    
+class Magazine:
+    def __init__(self, name, category):
+        # Validate name
+        if not isinstance(name, str):
+            raise Exception("Name must be a string")
+        if len(name) == 0:
+            raise Exception("Name must be longer than 0 characters")
+        
+        # Validate category
+        if not isinstance(category, str):
+            raise Exception("Category must be a string")
+        if len(category) == 0:
+            raise Exception("Category must be longer than 0 characters")
+        
+        self._name = name
+        self._category = category
+    
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        # Prevent changing name after instantiation
+        if hasattr(self, '_name'):
+            raise Exception("Name cannot be changed after instantiation")
+        self._name = value
+    
+    @property
+    def category(self):
+        return self._category
+    
+    @category.setter
+    def category(self, value):
+        # Prevent changing category after instantiation
+        if hasattr(self, '_category'):
+            raise Exception("Category cannot be changed after instantiation")
+        self._category = value
+    
+    def articles(self):
+        """Returns a list of all articles published in this magazine"""
+        return [article for article in Article.all if article.magazine == self]
